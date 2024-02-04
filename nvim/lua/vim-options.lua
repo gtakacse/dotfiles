@@ -9,4 +9,6 @@ vim.g.mapleader = " "
 -- Generic key bindings
 vim.keymap.set("i", "jk", "<esc>", {})
 vim.keymap.set("n", "<esc><esc>", ":noh<CR><esc>", {})
-vim.keymap.set("n", "<leader>x", ":bd<CR>", {})
+vim.keymap.set("n", "<leader>x", ":bdelete<CR>", {})
+vim.keymap.set("n", "<Tab>", ":bnext<CR>", {})
+vim.keymap.set("n", "<S-Tab>", ":bprevious<CR>", {})
