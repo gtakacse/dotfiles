@@ -7,6 +7,11 @@ execute pathogen#infect()
 " night-owl.vim
 " vim-airline
 " vim-airline-themes
+" fzf
+" fzf.vim
+" fugitive.vim
+" vim-commentary
+" vim-surround
 
 " Color schemes
 if (has("termguicolors"))
@@ -103,8 +108,9 @@ inoremap jk <esc>
 nnoremap <esc><esc> :noh<CR><esc>
 nnoremap <leader>ff :Files<CR>
 nnoremap <leader>fb :Buffers<CR>
+nnoremap <leader>fg :Rg<CR>
 nnoremap <leader>x :bdelete<CR>
 nnoremap <Tab> :bnext<CR>
-nnoremap <Tab> :bprevious<CR>
-
+nnoremap <S-Tab> :bprevious<CR>
+nnoremap <leader>fm gg=G " reindent file
 
