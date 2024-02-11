@@ -12,6 +12,7 @@ execute pathogen#infect()
 " fugitive.vim
 " vim-commentary
 " vim-surround
+" preservim/vim-markdown
 
 " Color schemes
 if (has("termguicolors"))
