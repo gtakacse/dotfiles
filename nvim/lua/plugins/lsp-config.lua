@@ -42,6 +42,12 @@ return {
       vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {})
       vim.keymap.set("n", "gr", vim.lsp.buf.references, {})
       vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
+      vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, {})
+      vim.diagnostic.config({
+        float = {
+          border = 'rounded'
+        }
+      })
     end,
   },
 }
