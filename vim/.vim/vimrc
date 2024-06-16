@@ -1,0 +1,197 @@
+" Manage plugins with Pathogen
+execute pathogen#infect()
+" Install plugins by cloning git repo under bundle
+" cd ~/.vim/bundle
+" git clone <giturl>
+"
+" Plugin list 
+" ===========
+" night-owl.vim
+" vim-airline
+" vim-airline-themes
+" fzf
+" fzf.vim
+" fugitive.vim
+" vim-commentary
+" vim-surround
+" preservim/vim-markdown
+" preservim/nerdtree
+
+filetype plugin indent on
+syntax on
+
+""""""""""
+" General
+""""""""""
+set nocompatible
+
+" Set VIM history
+set history=500
+
+" Enable filetype plugins
+filetype plugin on
+filetype indent on
+
+" Set to autoread when a file is changed externally
+set autoread
+
+" Map leader to space
+let mapleader=" "
+
+" Quickly jump to normal mode wih 'jk' in insert mode
+inoremap jk <esc><bs>l
+
+" Fast save
+nmap <leader>w :w!<cr>
+
+""""""""""""""""
+" User interface
+""""""""""""""""
+let $LANG='en'
+set langmenu=en
+
+"Prompt
+let &t_SI .= "\<Esc>[6 q"
+let &t_EI .= "\<Esc>[2 q"
+let &t_SR .= "\<Esc>[4 q"
+
+" Enable auto completion menu after pressing Tab
+set wildmenu 
+set wildmode=list:longest
+
+"set cmdheight=1
+
+" Backspace to work across lines
+set backspace=eol,start,indent
+set whichwrap+=<,>,h,l
+
+" Ignore case with searching
+set ignorecase
+
+" Enable smartcase search
+set smartcase
+set wrapscan
+
+" Highlight search reasults
+set hlsearch
+
+" Highlight incrementally during search term is typed
+set incsearch
+
+" Don't redaw while executing macros
+set lazyredraw
+
+" For regex turn on magic mode
+set magic
+
+" Show matching brackets
+set showmatch
+
+" Disable sound
+set noerrorbells
+set novisualbell
+set t_vb=
+set tm=500
+
+" Line numbers
+set number relativenumber
+
+""""""""""""""
+" Color theme
+""""""""""""""
+
+syntax enable
+if (has("termguicolors"))
+    set termguicolors
+	set t_Co=256
+endif
+
+try
+	colorscheme night-owl
+    let g:airline_theme = 'lighthaus'
+catch
+endtry
+
+set background=dark
+set encoding=utf8
+set laststatus=2
+
+""""""""""""""""""
+" Files and backup
+""""""""""""""""""
+
+set nobackup
+set nowb
+set noswapfile
+
+"""""""""""""""""""
+" Text, tab, indent
+"""""""""""""""""""
+
+" Use spaces instead of tabs
+set expandtab
+set smarttab
+
+" Tabwidth to 4 spaces
+set shiftwidth=4
+set tabstop=4
+
+" Linebreak on 500 characters
+set lbr
+set tw=500
+
+set ai "Auto indent
+set si "Smart indent
+set wrap "Wrap lines
+
+""""""""""""""
+" Visual mode
+""""""""""""""
+" Use * and # in visual mode to search for next occurrence
+vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
+vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
+
+""""""""""""""""""""""
+" Move between windows
+""""""""""""""""""""""
+
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
+" Close current buffer
+map <leader>x :Bclose<cr>:tabclose<cr>gT
+
+" Move between buffers with Tab
+nnoremap <Tab> :bnext<cr>
+nnoremap <S-Tab> :bprevious<cr>
+set hidden " move between buffers without saving
+
+" Format file
+nnoremap <leader>fm gg=G " reindent file
+
+" Delete trailing whitespaces on save
+fun! CleanExtraSpaces()
+    let save_cursor = getpos(".")
+    let old_query = getreg('/')
+    silent! %s/\s\+$//e
+    call setpos('.', save_cursor)
+    call setreg('/', old_query)
+endfun
+
+if has("autocmd")
+    autocmd BufWritePre *.txt,*.js,*.py,*.sh :call CleanExtraSpaces()
+endif
+
+""""""""""
+" NerdTree
+""""""""""
+nnoremap <C-n> :NERDTreeToggle<CR>
+
+"""""""""
+" Fzf 
+"""""""""
+nnoremap <leader>ff :Files<CR>
+nnoremap <leader>fb :Buffers<CR>
+nnoremap <leader>fg :Rg<CR>
