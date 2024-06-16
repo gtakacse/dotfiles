@@ -6,16 +6,15 @@ execute pathogen#infect()
 "
 " Plugin list 
 " ===========
-" night-owl.vim
-" vim-airline
-" vim-airline-themes
-" fzf
-" fzf.vim
-" fugitive.vim
-" vim-commentary
-" vim-surround
-" preservim/vim-markdown
-" preservim/nerdtree
+" night-owl.vim: https://github.com/haishanh/night-owl.vim
+" vim-airline: https://github.com/vim-airline/vim-airline
+" vim-airline-themes: https://github.com/vim-airline/vim-airline-themes
+" fzf.vim: https://github.com/junegunn/fzf.vim
+" fugitive.vim: https://github.com/tpope/vim-fugitive
+" vim-commentary: https://tpope.io/vim/commentary.git
+" vim-surround: https://tpope.io/vim/surround.git
+" preservim/vim-markdown: https://github.com/preservim/vim-markdown.git
+" preservim/nerdtree: https://github.com/preservim/nerdtree
 
 filetype plugin indent on
 syntax on
