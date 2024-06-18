@@ -33,6 +33,13 @@ return {
         filetypes = { "python" },
       })
 
+      -- lspconfig.rust_analyzer.setup({
+      --   capabilities = capabilities,
+      --   cmd = {
+      --     "rustup", "run", "stable", "rust-analyzer",
+      --   }
+      -- })
+
       vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
         border = "rounded",
       })
