@@ -17,9 +17,9 @@ vim.keymap.set("i", "jk", "<esc>", {})
 vim.keymap.set("n", "<leader>x", ":bdelete<CR>", {})
 vim.keymap.set("n", "<Tab>", ":bnext<CR>", {})
 vim.keymap.set("n", "<S-Tab>", ":bprevious<CR>", {})
+-- vim.keymap.set("n", "<leader>o", "i<CR><esc>", {})
 
 vim.keymap.set("n", "<C-j>", "<C-W>j", {})
 vim.keymap.set("n", "<C-k>", "<C-W>k", {})
 vim.keymap.set("n", "<C-h>", "<C-W>h", {})
 vim.keymap.set("n", "<C-l>", "<C-W>l", {})
-
