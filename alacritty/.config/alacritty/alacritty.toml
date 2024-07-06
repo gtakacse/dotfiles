@@ -12,6 +12,9 @@ blur = true
 option_as_alt = "Both"
 
 [font]
-size = 14.0
+size = 9.0
+# size = 14.0
 
-normal.family = "JetBrainsMono Nerd Font Mono"
+# normal.family = "JetBrainsMono Nerd Font Mono"
+normal.family = "Lilex Nerd Font Mono"
+
