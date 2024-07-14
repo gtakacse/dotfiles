@@ -15,6 +15,11 @@ execute pathogen#infect()
 " vim-surround: https://tpope.io/vim/surround.git
 " preservim/vim-markdown: https://github.com/preservim/vim-markdown.git
 " preservim/nerdtree: https://github.com/preservim/nerdtree
+" romainl/vim-cool: https://github.com/romainl/vim-cool
+" dense-analysis/ale: https://github.com/dense-analysis/ale
+" prabirshrestha/asyncomplete.vim
+" prabirshrestha/vim-lsp
+" prabirshrestha/asyncomplete-lsp.vim
 
 filetype plugin indent on
 syntax on
