@@ -199,3 +199,39 @@ nnoremap <C-n> :NERDTreeToggle<CR>
 nnoremap <leader>ff :Files<CR>
 nnoremap <leader>fb :Buffers<CR>
 nnoremap <leader>fg :Rg<CR>
+
+""""""""""
+" ALE
+""""""""""
+let g:ale_floating_preview = 1
+let g:ale_floating_window_border = ['│', '─', '╭', '╮', '╯', '╰']
+let g:ale_linters = {
+\   'python': ['mypy', 'pyright'],
+\}
+let g:ale_fixers = {
+\   '*': ['trim_whitespace'],
+\   'python': ['black', 'ruff'],
+\}
+
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+
+" Keymaps
+nnoremap <silent> <Leader>le <Cmd>lopen<CR>
+nnoremap <silent> <Leader>lr <Cmd>ALERename<CR>
+nnoremap <silent> <Leader>la <Cmd>ALECodeAction<CR>
+nnoremap <silent> <Leader>ld <Cmd>ALEGoToDefinition<CR>
+nnoremap <silent> <Leader>lf <Cmd>ALEFix<CR>
+nnoremap <silent> <Leader>lh <Cmd>ALEHover<CR>
+nnoremap <silent> <Leader>li <Cmd>ALEInfo<CR>
+
+" Vim Lsp
+if executable('pyls')
+    " pip install python-language-server
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'pyls',
+        \ 'cmd': {server_info->['pyls']},
+        \ 'allowlist': ['python'],
+        \ })
+endif

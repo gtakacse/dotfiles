@@ -1,4 +1,6 @@
 tmux/.config/tmux/plugins/catppuccin
 nvim/.config/lazy-lock.json
 *lazy-lock.json
-vim/.vim
+vim/.vim/bundle
+vim/.vim/autocomplete
+vim/.vim/autoload
