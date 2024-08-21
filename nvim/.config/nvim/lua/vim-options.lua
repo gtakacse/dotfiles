@@ -23,3 +23,8 @@ vim.keymap.set("n", "<C-j>", "<C-W>j", {})
 vim.keymap.set("n", "<C-k>", "<C-W>k", {})
 vim.keymap.set("n", "<C-h>", "<C-W>h", {})
 vim.keymap.set("n", "<C-l>", "<C-W>l", {})
+
+vim.keymap.set("n", "<C-Left>", "<C-W><", {})
+vim.keymap.set("n", "<C-Right>", "<C-W>>", {})
+vim.keymap.set("n", "<C-Up>", "<C-W>+", {})
+vim.keymap.set("n", "<C-Down>", "<C-W>-", {})
