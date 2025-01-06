@@ -22,13 +22,19 @@ vim.opt.mouse = ""
 -- Generic key bindings
 vim.keymap.set("i", "jk", "<esc>", {})
 
+-- Buffer actions
 vim.keymap.set("n", "<leader>x", ":bdelete<CR>", {})
-vim.keymap.set("n", "<C-m>", "<C-W>c", {})
-
-vim.keymap.set("n", "<C-t>", ":tabnew<CR>", {})
 vim.keymap.set("n", "<Tab>", ":bnext<CR>", {})
 vim.keymap.set("n", "<S-Tab>", ":bprevious<CR>", {})
 -- vim.keymap.set("n", "<leader>o", "i<CR><esc>", {})
+
+-- Tab actions
+vim.keymap.set("n", "<C-t>", ":tabnew %<CR>", {})
+
+-- Window actions
+vim.keymap.set("n", "w-", ":split<CR>", {})
+vim.keymap.set("n", "w\\", ":vsplit<CR>", {})
+vim.keymap.set("n", "<C-x>", "<C-W>c", {})
 
 -- Window navigation
 vim.keymap.set("n", "<C-j>", "<C-W>j", {})
@@ -59,13 +65,12 @@ vim.keymap.set("n", "<leader>d", "\"_d")
 vim.keymap.set("v", "<leader>d", "\"_d")
 
 -- Quickfix navigation
-vim.keymap.set("n", "<M-j>", "<cmd>cnext<CR>zz")
-vim.keymap.set("n", "<M-k>", "<cmd>cprev<CR>zz")
+vim.keymap.set("n", "<leader>j", "<cmd>cnext<CR>zz")
+vim.keymap.set("n", "<leader>k", "<cmd>cprev<CR>zz")
 -- vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 -- vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
-
 -- Smart replace
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 local function augroup(name)
     return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true })
