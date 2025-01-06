@@ -1,0 +1,7 @@
+theme = catppuccin-mocha
+font-family = Lilex Nerd Font Mono
+font-size = 13
+background-opacity = 0.96
+shell-integration-features = no-cursor,no-title
+cursor-style = block
+adjust-cell-height = 25%
