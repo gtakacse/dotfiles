@@ -11,8 +11,22 @@ return {
             require('telescope').setup({
                 pickers = {
                     find_files = {
-                        theme = "ivy"
-                    }
+                        theme = "ivy",
+                        path_display = "truncate",
+                    },
+                    live_grep = {
+                        theme = "ivy",
+                        path_display = "truncate",
+                    },
+                    live_grep_args = {
+                        theme = "ivy",
+                        path = "truncate",
+                    },
+                    buffers = {
+                        theme = "dropdown",
+                        previewer = false,
+                        path_display = "truncate",
+                    },
                 },
                 extensions = {
                     fzf = {},

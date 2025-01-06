@@ -26,7 +26,10 @@ vim.keymap.set("i", "jk", "<esc>", {})
 vim.keymap.set("n", "<leader>x", ":bdelete<CR>", {})
 vim.keymap.set("n", "<Tab>", ":bnext<CR>", {})
 vim.keymap.set("n", "<S-Tab>", ":bprevious<CR>", {})
--- vim.keymap.set("n", "<leader>o", "i<CR><esc>", {})
+
+-- Break line before and after the cursor
+vim.keymap.set("n", "<leader>o", "i<CR><esc>", {})
+vim.keymap.set("n", "<leader>O", "a<CR><esc>k$", {})
 
 -- Tab actions
 vim.keymap.set("n", "<C-t>", ":tabnew %<CR>", {})
@@ -67,10 +70,12 @@ vim.keymap.set("v", "<leader>d", "\"_d")
 -- Quickfix navigation
 vim.keymap.set("n", "<leader>j", "<cmd>cnext<CR>zz")
 vim.keymap.set("n", "<leader>k", "<cmd>cprev<CR>zz")
--- vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
--- vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
+
 -- Smart replace
+-- replace word the cursor is on
 vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+-- replace the last yanked text
+vim.keymap.set("n", "<leader>R", [[:%s/\<<C-r>"\>//gI<Left><Left><Left>]])
 
 local function augroup(name)
     return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true })
@@ -84,12 +89,21 @@ vim.api.nvim_create_autocmd("TextYankPost", {
         vim.highlight.on_yank()
     end,
 })
--- wrap and check for spell in text filetypes
+-- wrap and check for spell in text file types
 vim.api.nvim_create_autocmd("FileType", {
     group = augroup("wrap_spell"),
     pattern = { "text", "plaintex", "typst", "gitcommit", "markdown" },
     callback = function()
         vim.opt_local.wrap = true
         vim.opt_local.spell = true
+    end,
+})
+
+-- change terminal appearance
+vim.api.nvim_create_autocmd("TermOpen", {
+    group = augroup("custom_term"),
+    callback = function()
+        vim.opt.number = false
+        vim.opt.relativenumber = false
     end,
 })
