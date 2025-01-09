@@ -23,7 +23,10 @@ vim.opt.mouse = ""
 vim.keymap.set("i", "jk", "<esc>", {})
 
 -- Buffer actions
-vim.keymap.set("n", "<leader>x", ":bdelete<CR>", {})
+vim.keymap.set("n", "<leader>x", '<cmd>lua require("snacks").bufdelete()<CR>', { desc = "Delete buffere" })
+vim.keymap.set("n", "<leader>X", '<cmd>lua require("snacks").bufdelete.all()<CR>', { desc = "Delete all buffers" })
+vim.keymap.set("n", "<leader>x-", '<cmd>lua require("snacks").bufdelete.other()<CR>',
+    { desc = "Delete all buffers except current" })
 vim.keymap.set("n", "<Tab>", ":bnext<CR>", {})
 vim.keymap.set("n", "<S-Tab>", ":bprevious<CR>", {})
 
@@ -33,6 +36,9 @@ vim.keymap.set("n", "<leader>O", "a<CR><esc>k$", {})
 
 -- Tab actions
 vim.keymap.set("n", "<C-t>", ":tabnew %<CR>", {})
+
+-- Terminal
+vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>", {})
 
 -- Window actions
 vim.keymap.set("n", "w-", ":split<CR>", {})
@@ -66,6 +72,7 @@ vim.keymap.set("n", "<leader>Y", "\"+Y")
 -- Delete without trace
 vim.keymap.set("n", "<leader>d", "\"_d")
 vim.keymap.set("v", "<leader>d", "\"_d")
+vim.keymap.set({ "n", "v" }, "x", "\"_x")
 
 -- Quickfix navigation
 vim.keymap.set("n", "<leader>j", "<cmd>cnext<CR>zz")
