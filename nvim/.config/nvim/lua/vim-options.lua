@@ -84,6 +84,11 @@ vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 -- replace the last yanked text
 vim.keymap.set("n", "<leader>R", [[:%s/\<<C-r>"\>//gI<Left><Left><Left>]])
 
+-- Lazygit
+vim.keymap.set("n", "<leader>lg", '<cmd>lua require("snacks").lazygit()<CR>', { desc = "Open lazygit" })
+vim.keymap.set("n", "<leader>gb", '<cmd>lua require("snacks").git.blame_line()<CR>',
+    { desc = "Gitblame in floating window" })
+
 local function augroup(name)
     return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true })
 end
