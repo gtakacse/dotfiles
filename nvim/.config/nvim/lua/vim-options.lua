@@ -23,27 +23,20 @@ vim.opt.mouse = ""
 vim.keymap.set("i", "jk", "<esc>", {})
 
 -- Buffer actions
-vim.keymap.set("n", "<leader>x", '<cmd>lua require("snacks").bufdelete()<CR>', { desc = "Delete buffere" })
-vim.keymap.set("n", "<leader>X", '<cmd>lua require("snacks").bufdelete.all()<CR>', { desc = "Delete all buffers" })
-vim.keymap.set("n", "<leader>x-", '<cmd>lua require("snacks").bufdelete.other()<CR>',
-    { desc = "Delete all buffers except current" })
 vim.keymap.set("n", "<Tab>", ":bnext<CR>", {})
 vim.keymap.set("n", "<S-Tab>", ":bprevious<CR>", {})
 
 -- Break line before and after the cursor
-vim.keymap.set("n", "<leader>o", "i<CR><esc>", {})
-vim.keymap.set("n", "<leader>O", "a<CR><esc>k$", {})
+vim.keymap.set("n", "<leader>o", "i<CR><esc>", { desc = "Move to new line" })
+vim.keymap.set("n", "<leader>O", "a<CR><esc>k$", { desc = "Insert line after" })
 
 -- Tab actions
-vim.keymap.set("n", "<C-t>", ":tabnew %<CR>", {})
-
--- Terminal
-vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>", {})
+vim.keymap.set("n", "<leader>tn", ":tabnew %<CR>", { desc = "New tab" })
 
 -- Window actions
-vim.keymap.set("n", "w-", ":split<CR>", {})
-vim.keymap.set("n", "w\\", ":vsplit<CR>", {})
-vim.keymap.set("n", "<C-x>", "<C-W>c", {})
+vim.keymap.set("n", "<leader>w-", ":split<CR>", { desc = "Horizontal split" })
+vim.keymap.set("n", "<leader>w\\", ":vsplit<CR>", { desc = "Veritcal split" })
+vim.keymap.set("n", "<leader>wq", "<C-W>c", { desc = "Close window" })
 
 -- Window navigation
 vim.keymap.set("n", "<C-j>", "<C-W>j", {})
@@ -75,19 +68,14 @@ vim.keymap.set("v", "<leader>d", "\"_d")
 vim.keymap.set({ "n", "v" }, "x", "\"_x")
 
 -- Quickfix navigation
-vim.keymap.set("n", "<leader>j", "<cmd>cnext<CR>zz")
-vim.keymap.set("n", "<leader>k", "<cmd>cprev<CR>zz")
+vim.keymap.set("n", "<leader>j", "<cmd>cnext<CR>zz", { desc = "Next on quicklist" })
+vim.keymap.set("n", "<leader>k", "<cmd>cprev<CR>zz", { desc = "Prev on quicklist" })
 
 -- Smart replace
 -- replace word the cursor is on
-vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Replace word under" })
 -- replace the last yanked text
-vim.keymap.set("n", "<leader>R", [[:%s/\<<C-r>"\>//gI<Left><Left><Left>]])
-
--- Lazygit
-vim.keymap.set("n", "<leader>lg", '<cmd>lua require("snacks").lazygit()<CR>', { desc = "Open lazygit" })
-vim.keymap.set("n", "<leader>gb", '<cmd>lua require("snacks").git.blame_line()<CR>',
-    { desc = "Gitblame in floating window" })
+vim.keymap.set("n", "<leader>R", [[:%s/\<<C-r>"\>//gI<Left><Left><Left>]], { desc = "Replace last yanked" })
 
 local function augroup(name)
     return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true })

@@ -43,18 +43,22 @@ return {
                 },
             })
 
+            lspconfig.metals.setup({
+                capabilities = capabilities,
+            })
+
             vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
                 border = "rounded",
             })
 
             vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
-            vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
-            vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {})
-            vim.keymap.set("n", "gr", vim.lsp.buf.references, {})
-            vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
-            vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, {})
-            vim.keymap.set("n", "<leader>en", vim.diagnostic.goto_next, {})
-            vim.keymap.set("n", "<leader>ep", vim.diagnostic.goto_prev, {})
+            vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Goto definition" })
+            vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Goto implementation" })
+            vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Goto reference" })
+            vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code actions" })
+            vim.keymap.set("n", "<leader>eo", vim.diagnostic.open_float, { desc = "Open diagnostic window" })
+            vim.keymap.set("n", "<leader>en", vim.diagnostic.goto_next, { desc = "Next diagnostic message" })
+            vim.keymap.set("n", "<leader>ep", vim.diagnostic.goto_prev, { desc = "Prev diagnostic message" })
             vim.diagnostic.config({
                 float = {
                     border = "rounded",

@@ -8,7 +8,16 @@ return {
             size = 100 * 1024,
         },
         bufdelete = { enabled = true },
-        dashboard = { enabled = true },
+        dashboard = {
+            enabled = true,
+            sections = {
+                { section = "header" },
+                { icon = " ", title = "Keymaps", section = "keys", indent = 2, padding = 1 },
+                { icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
+                { icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
+                { section = "startup" },
+            },
+        },
         indent = {
             enabled = true,
             animate = {
@@ -61,6 +70,19 @@ return {
                     desc = "jump to the bottom of the scope"
                 }
             }
-        }
+        },
+        terminal = {
+            enabled = true,
+        },
+        styles = {
+        },
+    },
+    keys = {
+        { "<leader>xc", function() require("snacks").bufdelete() end,       desc = "Delete current buffer" },
+        { "<leader>xa", function() require("snacks").bufdelete.all() end,   desc = "Delete all buffers" },
+        { "<leader>x-", function() require("snacks").bufdelete.other() end, desc = "Delete all other buffers" },
+        { "<leader>lg", function() require("snacks").lazygit() end,         desc = "Open Lazygit" },
+        { "<leader>gb", function() require("snacks").git.blame_line() end,  desc = "Open git blame in window" },
+        { "<leader>to", function() require("snacks").terminal() end,        desc = "Open termina" },
     }
 }
