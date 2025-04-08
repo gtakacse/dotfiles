@@ -1,6 +1,6 @@
 return {
     "scalameta/nvim-metals",
-    enabled = false,
+    enabled = true,
     dependencies = {
         "nvim-lua/plenary.nvim",
         {
@@ -10,6 +10,10 @@ return {
     ft = { "scala", "sbt", "java" },
     opts = function()
         local metals_config = require("metals").bare_config()
+
+        metals_config.init_options = {
+            statusBarProvider = "off"
+        }
 
         metals_config.settings = {
             showImplicitArguments = true,
