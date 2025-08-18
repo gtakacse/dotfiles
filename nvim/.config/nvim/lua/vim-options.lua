@@ -7,14 +7,14 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.relativenumber = true
 vim.opt.number = true
-vim.opt.timeoutlen = 1000
-vim.opt.ttimeoutlen = 0
+-- vim.opt.timeoutlen = 1000
+-- vim.opt.ttimeoutlen = 0
 vim.opt.backspace = "eol,start,indent"
 vim.opt.whichwrap = "b,s,<,>,h,l"
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.magic = true
-vim.opt.listchars = "tab:»\\ ,leadmultispace:»\\ ,trail:-,eol:↲"
+-- vim.opt.listchars = "tab:»\\ ,leadmultispace:»\\ ,trail:-,eol:↲"
 vim.opt.cursorline = true
 vim.opt.swapfile = false
 vim.opt.mouse = ""
@@ -24,8 +24,27 @@ vim.opt.foldtext = "v:lua.vim.treesitter.foldtext()"
 vim.opt.foldcolumn = '1'
 vim.opt.foldlevelstart = 99
 
+vim.schedule(function()
+    vim.o.clipboard = 'unnamedplus'
+end)
+
+vim.o.showmode = false
+vim.o.breakindent = true
+vim.o.signcolumn = 'yes'
+vim.o.updatetime = 250
+vim.o.timeoutlen = 500
+
+vim.o.splitright = true
+vim.o.splitbelow = true
+
+vim.o.list = true
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣', leadmultispace = '» ', eol = '↲' }
+vim.o.inccommand = 'split'
+vim.o.confirm = true
+
 -- Generic key bindings
 vim.keymap.set("i", "jk", "<esc>", {})
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Buffer actions
 vim.keymap.set("n", "<Tab>", ":bnext<CR>", {})
@@ -83,7 +102,7 @@ vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 vim.keymap.set("n", "<leader>R", [[:%s/\<<C-r>"\>//gI<Left><Left><Left>]], { desc = "Replace last yanked" })
 
 -- Easy close of terminal
-vim.keymap.set("x", "<esc><esc>", "<C-><C-n>", { desc = "Exit terminal mode" })
+vim.keymap.set("t", "<esc><esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 local function augroup(name)
     return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true })
