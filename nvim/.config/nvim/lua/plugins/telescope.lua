@@ -12,20 +12,20 @@ return {
                 pickers = {
                     find_files = {
                         theme = "ivy",
-                        path_display = "truncate",
+                        path_display = { "truncate" },
                     },
                     live_grep = {
                         theme = "ivy",
-                        path_display = "truncate",
+                        path_display = { "truncate" },
                     },
                     live_grep_args = {
                         theme = "ivy",
-                        path = "truncate",
+                        path_display = "truncate",
                     },
                     buffers = {
                         theme = "dropdown",
                         previewer = false,
-                        path_display = "truncate",
+                        path_display = { "truncate" },
                     },
                 },
                 extensions = {
@@ -56,7 +56,8 @@ return {
                 -- builtin.live_grep(opts)
                 require("telescope").extensions.live_grep_args.live_grep_args(opts)
             end, { desc = "Live grep" })
-            vim.keymap.set("n", "<leader>fw", live_grep_args_shortcuts.grep_word_under_cursor, { desc = "Live grep word under cursor" })
+            vim.keymap.set("n", "<leader>fw", live_grep_args_shortcuts.grep_word_under_cursor,
+                { desc = "Live grep word under cursor" })
             vim.keymap.set("n", "<leader>fs", builtin.git_files, { desc = "Find git files" })
         end,
     },
