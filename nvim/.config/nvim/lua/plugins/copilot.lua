@@ -1,10 +1,14 @@
 return {
     "github/copilot.vim",
-    enabled = false,
+    enabled = true,
     config = function()
+        -- unset Tab for acceptin Copilot suggestions
+        vim.cmd('let g:copilot_no_tab_map = v:true')
         vim.keymap.set('i', '<C-A>', 'copilot#Accept("\\<CR>")', {
             expr = true,
-            replace_keycodes = false
+            replace_keycodes = false,
+            noremap = true,
+            desc = "Copilot Accept",
         })
         vim.keymap.set('i', '<C-W>', '<Plug>(copilot-accept-word)')
         vim.keymap.set('i', '<C-L>', '<Plug>(copilot-accept-line)')
