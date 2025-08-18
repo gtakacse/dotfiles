@@ -18,6 +18,11 @@ vim.opt.listchars = "tab:»\\ ,leadmultispace:»\\ ,trail:-,eol:↲"
 vim.opt.cursorline = true
 vim.opt.swapfile = false
 vim.opt.mouse = ""
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldtext = "v:lua.vim.treesitter.foldtext()"
+vim.opt.foldcolumn = '1'
+vim.opt.foldlevelstart = 99
 
 -- Generic key bindings
 vim.keymap.set("i", "jk", "<esc>", {})
@@ -74,8 +79,11 @@ vim.keymap.set("n", "<leader>k", "<cmd>cprev<CR>zz", { desc = "Prev on quicklist
 -- Smart replace
 -- replace word the cursor is on
 vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Replace word under" })
--- replace the last yanked text
+-- Replace the last yanked text
 vim.keymap.set("n", "<leader>R", [[:%s/\<<C-r>"\>//gI<Left><Left><Left>]], { desc = "Replace last yanked" })
+
+-- Easy close of terminal
+vim.keymap.set("x", "<esc><esc>", "<C-><C-n>", { desc = "Exit terminal mode" })
 
 local function augroup(name)
     return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true })
