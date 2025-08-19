@@ -35,6 +35,12 @@ return {
                     map('gi', vim.lsp.buf.implementation, 'Goto Implementation')
                     map('gr', vim.lsp.buf.references, 'Goto Referencies')
                     map('<leader>ca', vim.lsp.buf.code_action, 'Code action')
+                    -- Defaults
+                    -- map('grd', vim.lsp.buf.definition, 'Goto definition')
+                    -- map('grt', vim.lsp.buf.type_definition, 'Goto Type Definition')
+                    -- map('gri', vim.lsp.buf.implementation, 'Goto Implementation')
+                    -- map('grr', vim.lsp.buf.references, 'Goto Referencies')
+                    -- map('gra', vim.lsp.buf.code_action, 'Code action')
                     map('<leader>eo', vim.diagnostic.open_float, 'Open Diagnostics Window')
                     map('<leader>en', vim.diagnostic.goto_next, 'Next Diagnostics Message')
                     map('<leader>ep', vim.diagnostic.goto_prev, 'Previous Diagnostics Message')

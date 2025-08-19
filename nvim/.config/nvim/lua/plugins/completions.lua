@@ -1,12 +1,20 @@
 return {
     {
         'saghen/blink.cmp',
+        event = 'VimEnter',
         dependencies = {
             {
                 'L3MON4D3/LuaSnip',
-                version = 'v2.*'
+                version = 'v2.*',
+                dependencies = {
+                    {
+                        'rafamadriz/friendly-snippets',
+                        config = function()
+                            require('luasnip.loaders.from_vscode').lazy_load()
+                        end,
+                    },
+                },
             },
-            'rafamadriz/friendly-snippets'
         },
         version = '1.*',
         opts = {
@@ -18,7 +26,7 @@ return {
                 menu = { border = 'single' },
                 documentation = { auto_show = true, auto_show_delay_ms = 200 }
             },
-            -- snippets = { preset = "luasnip" },
+            snippets = { preset = "luasnip" },
             sources = {
                 default = { 'lsp', 'path', 'snippets', 'buffer' },
             },
