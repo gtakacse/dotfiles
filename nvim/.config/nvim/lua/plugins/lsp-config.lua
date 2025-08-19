@@ -18,48 +18,57 @@ return {
     },
     {
         "neovim/nvim-lspconfig",
+        dependencies = {
+            'saghen/blink.cmp',
+        },
         config = function()
-            local capabilities = require("cmp_nvim_lsp").default_capabilities()
+            vim.api.nvim_create_autocmd('LspAttach', {
+                group = vim.api.nvim_create_augroup('custom-lsp-attach', { clear = true }),
+                callback = function(event)
+                    local map = function(keys, func, desc, mode)
+                        mode = mode or 'n'
+                        vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
+                    end
 
-            local lspconfig = require("lspconfig")
-            lspconfig.lua_ls.setup({
-                capabilities = capabilities,
-            })
-            lspconfig.ts_ls.setup({
-                capabilities = capabilities,
-            })
-            lspconfig.pyright.setup({
-                capabilities = capabilities,
-                filetypes = { "python" },
-            })
-
-            lspconfig.rust_analyzer.setup({
-                capabilities = capabilities,
-                cmd = {
-                    "rustup",
-                    "run",
-                    "stable",
-                    "rust-analyzer",
-                },
+                    map('K', vim.lsp.buf.hover, 'Hover Open')
+                    map('gd', vim.lsp.buf.definition, 'Goto Definition')
+                    map('gi', vim.lsp.buf.implementation, 'Goto Implementation')
+                    map('gr', vim.lsp.buf.references, 'Goto Referencies')
+                    map('<leader>ca', vim.lsp.buf.code_action, 'Code action')
+                    map('<leader>eo', vim.diagnostic.open_float, 'Open Diagnostics Window')
+                    map('<leader>en', vim.diagnostic.goto_next, 'Next Diagnostics Message')
+                    map('<leader>ep', vim.diagnostic.goto_prev, 'Previous Diagnostics Message')
+                end
             })
 
-            -- lspconfig.metals.setup({
-            --     capabilities = capabilities,
-            -- })
-
-            vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
-            vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Goto definition" })
-            vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Goto implementation" })
-            vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Goto reference" })
-            vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code actions" })
-            vim.keymap.set("n", "<leader>eo", vim.diagnostic.open_float, { desc = "Open diagnostic window" })
-            vim.keymap.set("n", "<leader>en", vim.diagnostic.goto_next, { desc = "Next diagnostic message" })
-            vim.keymap.set("n", "<leader>ep", vim.diagnostic.goto_prev, { desc = "Prev diagnostic message" })
             vim.diagnostic.config({
                 float = {
                     border = "rounded",
                 },
             })
+
+            local servers = {
+                lua_ls = {},
+                pyright = {
+                },
+                ts_ls = {},
+                rust_analyzer = {
+                    cmd = {
+                        "rustup",
+                        "run",
+                        "stable",
+                        "rust-analyzer",
+                    }
+                },
+                -- metals = {},
+            }
+
+            local lspconfig = require("lspconfig")
+            local capabilities = require('blink.cmp').get_lsp_capabilities()
+            for server_name, server in pairs(servers) do
+                server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+                lspconfig[server_name].setup(server)
+            end
         end,
     },
 }
