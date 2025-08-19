@@ -1,6 +1,6 @@
 return {
     "github/copilot.vim",
-    enabled = true,
+    enabled = false,
     config = function()
         -- unset Tab for acceptin Copilot suggestions
         vim.cmd('let g:copilot_no_tab_map = v:true')
