@@ -47,10 +47,6 @@ return {
             --     capabilities = capabilities,
             -- })
 
-            vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-                border = "rounded",
-            })
-
             vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
             vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Goto definition" })
             vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Goto implementation" })
