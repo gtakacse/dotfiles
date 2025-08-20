@@ -17,6 +17,13 @@ return {
         end,
     },
     {
+        'folke/lazydev.nvim',
+        ft = 'lua',
+        opts = {
+            { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
+        }
+    },
+    {
         "neovim/nvim-lspconfig",
         dependencies = {
             'saghen/blink.cmp',
@@ -30,31 +37,26 @@ return {
                         vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
                     end
 
-                    map('K', vim.lsp.buf.hover, 'Hover Open')
-                    map('gd', vim.lsp.buf.definition, 'Goto Definition')
-                    map('gi', vim.lsp.buf.implementation, 'Goto Implementation')
-                    map('gr', vim.lsp.buf.references, 'Goto Referencies')
-                    map('<leader>ca', vim.lsp.buf.code_action, 'Code action')
-                    -- Defaults
-                    -- map('grd', vim.lsp.buf.definition, 'Goto definition')
-                    -- map('grt', vim.lsp.buf.type_definition, 'Goto Type Definition')
-                    -- map('gri', vim.lsp.buf.implementation, 'Goto Implementation')
-                    -- map('grr', vim.lsp.buf.references, 'Goto Referencies')
-                    -- map('gra', vim.lsp.buf.code_action, 'Code action')
-                    map('<leader>eo', vim.diagnostic.open_float, 'Open Diagnostics Window')
-                    map('<leader>en', vim.diagnostic.goto_next, 'Next Diagnostics Message')
-                    map('<leader>ep', vim.diagnostic.goto_prev, 'Previous Diagnostics Message')
+                    map('grn', vim.lsp.buf.rename, '[R]e[n]ame')
+                    map('gra', vim.lsp.buf.code_action, 'Code Action', { 'n', 'x' })
+                    map('grr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+                    map('gri', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
+                    map('grd', require('telescope.builtin').lsp_definitions, '[G]oto [Definition')
+                    map('grD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+                    map('grt', require('telescope.builtin').lsp_type_definitions, '[G]oto [T]ype Definitino')
+                    map('gO', require('telescope.builtin').lsp_document_symbols, 'Open Document Symbols')
+                    map('gW', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Open Workspace Symbol')
                 end
             })
 
-            vim.diagnostic.config({
-                float = {
-                    border = "rounded",
-                },
-            })
-
             local servers = {
-                lua_ls = {},
+                lua_ls = {
+                    settings = {
+                        Lua = {
+                            diagnostic = { disable = { 'missing-fields' } }
+                        },
+                    }
+                },
                 pyright = {
                 },
                 ts_ls = {},
