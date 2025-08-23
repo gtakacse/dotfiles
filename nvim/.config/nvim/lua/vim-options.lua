@@ -41,7 +41,6 @@ vim.o.list = true
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣', leadmultispace = '» ', eol = '↲' }
 vim.o.inccommand = 'split'
 vim.o.confirm = true
-vim.o.winborder = 'rounded'
 
 -- Generic key bindings
 vim.keymap.set("i", "jk", "<esc>", {})

@@ -46,6 +46,12 @@ return {
                     map('grt', require('telescope.builtin').lsp_type_definitions, '[G]oto [T]ype Definitino')
                     map('gO', require('telescope.builtin').lsp_document_symbols, 'Open Document Symbols')
                     map('gW', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Open Workspace Symbol')
+                    map('<leader>e', vim.diagnostic.open_float, 'Open Diagnostic Window')
+
+                    vim.keymap.del('n', 'K', { buffer = event.buf })
+                    map('K', function()
+                        vim.lsp.buf.hover { border = 'rounded' }
+                    end, 'Open Hover')
 
                     local function client_support_method(client, method, bufnr)
                         if vim.fn.has 'nvim-0.11' == 1 then
