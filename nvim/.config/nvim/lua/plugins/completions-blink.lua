@@ -14,6 +14,19 @@ return {
                         end,
                     },
                 },
+                config = function()
+                    local luasnip = require('luasnip')
+                    vim.keymap.set({ 'i', 's' }, '<C-l>', function()
+                        if luasnip.expand_or_jumpable() then
+                            luasnip.expand_or_jump()
+                        end
+                    end, { desc = 'LuaSnip Expand or Jump Next' })
+                    vim.keymap.set({ 'i', 's' }, '<C-j>', function()
+                        if luasnip.jumpable(-1) then
+                            luasnip.jump(-1)
+                        end
+                    end, { desc = 'LuaSnip Jump Previous' })
+                end
             },
         },
         version = '1.*',
