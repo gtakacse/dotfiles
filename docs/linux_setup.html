@@ -1,0 +1,230 @@
+
+<!DOCTYPE html>
+<head>
+  <link rel="stylesheet" href="github_markdown.css">
+</head>
+<h1>Linux Setup</h1>
+<h2>Prepare the install</h2>
+<p>Download image from <a href="https://archlinux.org/download/">https://archlinux.org/download/</a></p>
+<p>Save the ISO image to a USB. On Mac,<br />
+find the USB by <br />
+$ diskutil list<br />
+unmount the device<br />
+$ diskutil unmountDisk /dev/disk4</p>
+<p>Save the image to the USB drive, make sure to add the "r" before it<br />
+$ sudo dd if=archlinux-x86_64.iso of=/dev/rdisk4 bs=1m status=progress</p>
+<p>In the Lenovo ThinkPad,<br />
+- make sure the boot is set to UEFI booting, as the Linux image only supports UEFI loading (open with F1)<br />
+- make sure the laptop is charged<br />
+- use the left USB port (the rest seems to be broken)<br />
+- press F12 to open the boot manager at startup</p>
+<h2>Run the install</h2>
+<p>After the initial setup, when greeted with the root@archiso prompt,<br />
+- setup the internet connection by running</p>
+<pre class="highlight"><code>$ iwctl
+[iwd] device list
+[iwd] station wlan0 scan
+[iwd] station wlan0 get-nerworks
+[iwd] station wlan0 connect Telekom-096347
+passphase: *****
+# Check setup
+[iwd] station wlan0 show
+</code></pre>
+
+<p>More compactly</p>
+<pre class="highlight"><code>$ iwctl --passphrase passphrase station name connect SSID
+</code></pre>
+
+<p>Run setup script:</p>
+<pre class="highlight"><code>$ archinstall
+</code></pre>
+
+<h3>Set options</h3>
+<ul>
+<li>Mirror <ul>
+<li>Hu</li>
+</ul>
+</li>
+<li>
+<p>Disk configuration </p>
+<ul>
+<li>Best effort </li>
+<li>Select drive with the most space</li>
+<li>Use btrfs filesystem</li>
+<li>Use default config</li>
+<li>With configuration</li>
+</ul>
+</li>
+<li>
+<p>Boot loader </p>
+<ul>
+<li>Grub</li>
+</ul>
+</li>
+<li>
+<p>Add root password</p>
+</li>
+<li>Add user with superuser</li>
+<li>Audio <ul>
+<li>Pipeiwire</li>
+</ul>
+</li>
+<li>
+<p>Kernel </p>
+<ul>
+<li>Linux</li>
+</ul>
+</li>
+<li>
+<p>Network config </p>
+<ul>
+<li>Use NetworkManager</li>
+</ul>
+</li>
+</ul>
+<p>When the setup is complete, select "Install"</p>
+<h2>Post install configuration</h2>
+<p>Chroot into the installation by selecting yes</p>
+<p>Install desktop environment</p>
+<pre class="highlight"><code>$ pacman -S gnome
+</code></pre>
+
+<p>Restart computer by</p>
+<pre class="highlight"><code>$ exit
+$ shutdown -h now
+</code></pre>
+
+<p>After start, select Arch Linux installation and login to user<br />
+Enable gnome</p>
+<pre class="highlight"><code>$ sudo systemctl enable gdm.service
+$ sudo systemctl start gdm.service
+</code></pre>
+
+<h1>Wifi problems with Macbook Pro</h1>
+<p><code>nmcli</code> was unable to connect to wifi networks. The network driver was working and the wifi networks were listed.<br />
+The problem was with the <code>wpa_supplicant</code> library. It only works with the <code>wpa_supplicant-2_2.10-8</code> package.<br />
+<a href="https://bbs.archlinux.org/viewtopic.php?id=298171">https://bbs.archlinux.org/viewtopic.php?id=298171</a></p>
+<p>Steps to fix it:<br />
+1. Get the package ( I got wpa_supplicant-2_2.10-8 ) from <a href="https://archive.archlinux.org/packages/">https://archive.archlinux.org/packages/</a> … upplicant/</p>
+<p>And just do:</p>
+<pre class="highlight"><code>sudo pacman -U package
+</code></pre>
+
+<p>In order to avoid updating the package while this get fix I added the exception to pacman so this package will be ignored:</p>
+<pre class="highlight"><code>sudo nano /etc/pacman.conf
+</code></pre>
+
+<p>Look for this lines and add "wpa_supplicant":</p>
+<h1>Pacman won't upgrade packages listed in IgnorePkg and members of IgnoreGroup</h1>
+<p>IgnorePkg   = wpa_supplicant</p>
+<p>Just in case, I restarted the following services:</p>
+<pre class="highlight"><code>sudo systemctl restart wpa_supplicant
+sudo systemctl restart NetworkManager
+</code></pre>
+
+<h2>System setup</h2>
+<p>Install a few useful apps</p>
+<pre class="highlight"><code>$ sudo pacman -S less
+$ sudo pacman -S vim
+$ sudo pacman -S neovim
+$ sudo pacman -S neofetch
+$ sudo pacman -S firefox
+$ sudo pacman -S ripgrep
+$ sudo pacman -S bat
+$ sudo pacman -S fzf
+$ sudo pacman -S fd
+$ sudo pacman -S jq
+$ sudo pacman -S tmux
+$ sudo pacman -S lazygit
+</code></pre>
+
+<p>Install yay</p>
+<pre class="highlight"><code>$ sudo pacman -S --needed git base-devel
+$ git clone https://aur.archlinux.org/yay.git
+$ cd yay
+$ makepkg -si 
+</code></pre>
+
+<p>Upgrade system</p>
+<pre class="highlight"><code>$ sudo pacman -Syu
+</code></pre>
+
+<p>Upgrade grub after updates</p>
+<pre class="highlight"><code>$ sudo pacman -S grub-mkconfig -o /boot/grub/grub.cfg
+</code></pre>
+
+<p>To avoid breaking grub with kernel upgrades</p>
+<pre class="highlight"><code>$ yay -S grub-hook
+</code></pre>
+
+<p>Install nerdfont</p>
+<pre class="highlight"><code>$ yay -S ttf-lilex-nerd
+</code></pre>
+
+<h3>Dotfile setup</h3>
+<pre class="highlight"><code>$ sudo pacman -S stow
+</code></pre>
+
+<p>Fetch dotfiles from github</p>
+<pre class="highlight"><code>$ stow nvim -t $HOME
+$ stow tmux -t $HOME
+</code></pre>
+
+<p>Install tpm and/or theme</p>
+<h3>Setup kitty</h3>
+<pre class="highlight"><code>$ sudo pacman -S kitty
+$ kitten theme
+</code></pre>
+
+<p>Select Night Owl<br />
+Hit "M" to modify kitty.conf</p>
+<pre class="highlight"><code>$ nvim ~/.config/kitty/kitty.conf
+</code></pre>
+
+<h3>Setup starship for pretty prompt</h3>
+<pre class="highlight"><code>$ sudo pacman -S starship
+$ stow starship -t $HOME
+</code></pre>
+
+<p>Add to .bashrc</p>
+<pre class="highlight"><code>eval &quot;$(starship init bash)&quot;
+</code></pre>
+
+<h3>Setup yazi</h3>
+<pre class="highlight"><code>$ sudo pacman -S yazi
+</code></pre>
+
+<p>Create alias y and change working directory if exiting with 'q' by adding the following to ~/.bashrc</p>
+<pre class="highlight"><code>function y() {
+    local tmp=&quot;$(mktemp -t &quot;yazi-cwd.XXXXXX&quot;)&quot;
+    yazi &quot;$@&quot; --cwd-file=&quot;$tmp&quot;
+    if cwd=&quot;$(cat -- &quot;$tmp&quot;)&quot; &amp;&amp; [ -n &quot;$cwd&quot; ] &amp;&amp; [ &quot;$cwd&quot; != &quot;$PWD&quot; ]; then
+        builtin cd -- &quot;$cwd&quot;
+    fi
+    rm -f -- &quot;$tmp&quot;
+}
+</code></pre>
+
+<p>Configure yazi</p>
+<pre class="highlight"><code>$ mkdir ~/.config/yazi
+$ nvim ~/.config/yazi/yazi.conf
+</code></pre>
+
+<p>Change default editor by adding</p>
+<pre class="highlight"><code>[opener]
+edit = [
+    { run = 'nvim &quot;$@&quot;', block = true, for = &quot;unix&quot; },
+]
+</code></pre>
+
+<p>Show hidden files</p>
+<pre class="highlight"><code>[manager]
+show_hidden = true
+</code></pre>
+
+<h2>Setup Hyprland</h2>
+<pre class="highlight"><code>$ sudo pacman -S hyprland
+$ sudo pacman -S hyperpaper
+$ sudo pacamn -S waybar
+$ sudo pacman -S wofi
+</code></pre>

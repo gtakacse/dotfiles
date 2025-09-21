@@ -290,7 +290,7 @@ Count lines in a file which has the current date in its name.
    Word splitting is based on the `IFS` variable. By default, it's defined as `IFS=' \t\n'`.
 
 2. Pathname expansion
-   Unquoted words containing `*`, `?`, and `[` are treated as file globbing patterns and are replaced by alphabetic list of files that match the pattern. The asterisk matches any string. The question mark matches any single character. The square brackets match any of the enclosed characters (e.g. `[aeiou]`, `[[:lower:]]`)
+   Unquoted words containing `*`, `?`, and `[` are treated as file globing patterns and are replaced by alphabetic list of files that match the pattern. The asterisk matches any string. The question mark matches any single character. The square brackets match any of the enclosed characters (e.g. `[aeiou]`, `[[:lower:]]`)
 
 3. Process substitution
    Process substitution creates a temporary file name for a command or list of commands. It can be used anywhere a file name is expected. The form is `<(command)` or `>(command)`.
