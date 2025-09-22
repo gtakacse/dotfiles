@@ -1,6 +1,6 @@
-theme = catppuccin-mocha
+theme = TokyoNight Storm
 font-family = Lilex Nerd Font Mono
-font-size = 13
+font-size = 11
 background-opacity = 0.96
 shell-integration-features = no-cursor,no-title
 cursor-style = block

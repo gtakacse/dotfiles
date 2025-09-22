@@ -140,8 +140,13 @@ $ sudo pacman -S lazygit
 ```
 
 ### Bluetooth setup
-$ sudo pacman -S bluez bluez-utils
+Install bluez-utils
+```
+$ sudo pacman -S bluez-utils bluetui
+$ sudo systemctl enable bluetooth.service
+```
 
+To pair keyboard use `bluetoothctl` [arch docs](https://wiki.archlinux.org/title/Bluetooth) or with the TUI tool `bluetui`.
 
 Install yay
 ```
@@ -258,3 +263,71 @@ $ sudo pacamn -S waybar
 $ sudo pacman -S wofi
 ```
 
+To logout from hyprland:
+```
+$ hyprctl dispatch exit
+```
+
+## Dev environment setup
+
+### Java
+Install Arch Java environment manager [docs](https://wiki.archlinux.org/title/Java).
+
+```
+$ sudo pacman -S java-runtime-common java-environment-common
+
+$ sudo pacman -S jdk17-openjdk jdk21-openjdk
+```
+
+Check available java versions with `archlinux-java`:
+```
+$ archlinux-java status
+```
+
+### Scala
+Setup Scala with Coursier
+
+Install Coursier and the Scala ecosystem:
+```
+curl -fL "https://github.com/coursier/launchers/raw/master/cs-x86_64-pc-linux.gz" | gzip -d > cs
+chmod +x cs
+./cs setup
+```
+
+After the setup the basic Scala apps (e.g. scala, scalac, sbt) are installed under `$HOME/.local/share/coursier/bin` and the $PATH is updated in `~/.bash_profile`.
+
+### Python
+
+Python is installed by default. Additional packages for system-wide use should be installed with pacman e.g.:
+```
+sudo pacman -S python-black
+```
+
+Otherwise, virtual environments should be used.
+
+### NPM
+
+Install `npm` package. It is required by `mason`, NeoVim's package manager.
+```
+sudo pacman -S npm
+// verify install 
+$ npm --version
+$ node --version
+```
+
+Install 3rd party packages with `npm`:
+```
+$ npm install <packageName>
+// Install globally
+$ sudo npm -g install pyright
+```
+
+### Rust
+
+```
+$ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+$ rustup update
+$ rustup component add rustfmt
+$ rustup component add clippy
+$ rustup component add rust-analyzer
+```
