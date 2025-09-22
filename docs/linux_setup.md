@@ -139,6 +139,10 @@ $ sudo pacman -S tmux
 $ sudo pacman -S lazygit
 ```
 
+### Bluetooth setup
+$ sudo pacman -S bluez bluez-utils
+
+
 Install yay
 ```
 $ sudo pacman -S --needed git base-devel
@@ -154,7 +158,7 @@ $ sudo pacman -Syu
 
 Upgrade grub after updates
 ```
-$ sudo pacman -S grub-mkconfig -o /boot/grub/grub.cfg
+$ sudo grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
 To avoid breaking grub with kernel upgrades
@@ -168,25 +172,35 @@ $ yay -S ttf-lilex-nerd
 ```
 
 ### Dotfile setup
+
+Github setup
+```
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_rsa
+cat ~/.ssh/id_rsa.pub
+```
+
+Install stow
 ```
 $ sudo pacman -S stow
 ```
 Fetch dotfiles from github
 ```
+$ cd $dotfiles
 $ stow nvim -t $HOME
 $ stow tmux -t $HOME
 ```
 Install tpm and/or theme
+```
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+```
 
-### Setup kitty
+
+### Setup ghostty
 ```
-$ sudo pacman -S kitty
-$ kitten theme
-```
-Select Night Owl
-Hit "M" to modify kitty.conf
-```
-$ nvim ~/.config/kitty/kitty.conf
+pacman -S ghostty
+stow ghostty -t $HOME
 ```
 
 ### Setup starship for pretty prompt
@@ -220,7 +234,7 @@ function y() {
 Configure yazi
 ```
 $ mkdir ~/.config/yazi
-$ nvim ~/.config/yazi/yazi.conf
+$ nvim ~/.config/yazi/yazi.toml
 ```
 
 Change default editor by adding
@@ -239,7 +253,8 @@ show_hidden = true
 ## Setup Hyprland
 ```
 $ sudo pacman -S hyprland
-$ sudo pacman -S hyperpaper
+$ sudo pacman -S hyprpaper
 $ sudo pacamn -S waybar
 $ sudo pacman -S wofi
 ```
+
