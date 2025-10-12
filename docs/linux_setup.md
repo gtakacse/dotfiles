@@ -26,7 +26,7 @@ $ iwctl
 [iwd] device list
 [iwd] station wlan0 scan
 [iwd] station wlan0 get-nerworks
-[iwd] station wlan0 connect Telekom-096347
+[iwd] station wlan0 connect Telekom-xxxxxx
 passphase: *****
 # Check setup
 [iwd] station wlan0 show
@@ -36,6 +36,8 @@ More compactly
 ```
 $ iwctl --passphrase passphrase station name connect SSID
 ```
+
+Exit iwctl with Ctrl+C
 
 Run setup script:
 ```
@@ -50,19 +52,20 @@ $ archinstall
     - Select drive with the most space
     - Use btrfs filesystem
     - Use default config
-    - With configuration
+    - With compression
 
 - Boot loader 
     - Grub
 
 - Add root password
 - Add user with superuser
-- Audio 
-    - Pipeiwire
-- Kernel 
+- Applications
+    - Audio: Pipeiwire
+    - Bluetooth: Enable
+- Kernel
     - Linux
 
-- Network config 
+- Network config
     - Use NetworkManager
 
 When the setup is complete, select "Install"
@@ -140,6 +143,7 @@ $ sudo pacman -S lazygit
 ```
 
 ### Bluetooth setup
+If the bluetooth setup was not successful during setup, install manually:
 Install bluez-utils
 ```
 $ sudo pacman -S bluez-utils bluetui
@@ -176,6 +180,11 @@ Install nerdfont
 $ yay -S ttf-lilex-nerd
 ```
 
+Install Brave browser
+```
+$ yay -S brave-bin
+```
+
 ### Dotfile setup
 
 Github setup
@@ -192,7 +201,7 @@ $ sudo pacman -S stow
 ```
 Fetch dotfiles from github
 ```
-$ cd $dotfiles
+$ cd dotfiles
 $ stow nvim -t $HOME
 $ stow tmux -t $HOME
 ```
@@ -200,6 +209,8 @@ Install tpm and/or theme
 ```
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ```
+
+Install plugins with `Ctrl+a + I` or with `tmux source ~/.tmux.conf`
 
 
 ### Setup ghostty
@@ -261,6 +272,13 @@ $ sudo pacman -S hyprland
 $ sudo pacman -S hyprpaper
 $ sudo pacamn -S waybar
 $ sudo pacman -S wofi
+```
+
+Setup up with stow
+```
+$ stow hyprland -t $HOME
+$ stow waybar -t $HOME
+$ stow wofi -t $HOME
 ```
 
 To logout from hyprland:
