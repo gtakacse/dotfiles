@@ -5,3 +5,5 @@ background-opacity = 0.96
 shell-integration-features = no-cursor,no-title
 cursor-style = block
 adjust-cell-height = 25%
+app-notifications = no-clipboard-copy
+bell-features = no-system,no-audio,no-title
