@@ -60,7 +60,7 @@ $ archinstall
 - Add root password
 - Add user with superuser
 - Applications
-    - Audio: Pipeiwire
+    - Audio: Pipewire
     - Bluetooth: Enable
 - Kernel
     - Linux
@@ -285,6 +285,19 @@ To logout from hyprland:
 ```
 $ hyprctl dispatch exit
 ```
+
+## Audio Setup
+PipeWire documentation: [here](https://wiki.archlinux.org/title/PipeWire) 
+
+Check client: `pactl info`
+
+With HDMI monitors, the system speaker might not be active by default. To fix that do the following:
+- identify the card numbers: `pactl cards | grep Card`
+- make sure the selected active profile has the speaker `pactl list cards | grep -A10 Profiles:`
+- if not, set it with `pactl set-card-profile <CARD_ID> "HiFi (HDMI1, HDMI2, HDMI3, Mic1, Mic2, Speaker)"`
+- check the default sink is the speaker `pactl get-default-sink`
+- if not check the sinks `pactl list sinks short` and set the speaker as the default `pactl set-default-sink <SINK_ID>`
+
 
 ## Dev environment setup
 
