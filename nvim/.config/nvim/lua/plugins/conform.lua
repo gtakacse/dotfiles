@@ -34,6 +34,7 @@ return {
             markdown = { 'prettierd' },
             html = { 'prettierd' },
             json = { 'prettierd' },
+            sh = { 'shfmt' },
             -- scala = { 'prettierd' }
         }
     }
