@@ -1,0 +1,135 @@
+{
+    "workbench.colorTheme": "Tokyo Night Storm",
+    "window.zoomLevel": 2,
+    "editor.minimap.enabled": false,
+    "editor.wordWrap": "on",
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+
+    "vim.leader": "<space>",
+    "vim.hlsearch": true,
+    "vim.useSystemClipboard": true,
+    "vim.smartRelativeLine": true,
+    "vim.highlightedyank.enable": true,
+    "editor.lineNumbers": "relative",
+
+    "vim.insertModeKeyBindings": [
+        {
+        "before": ["j", "k"],
+        "after": ["<Esc>"]
+        },
+    ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": ["K"],
+            "commands": ["editor.action.showHover"],
+            "silent": true
+        },
+        {
+            "before": ["J"],
+            "commands": ["editor.action.joinLines"],
+            "silent": true
+        },
+        {
+            "before": ["<leader>", ":"],
+            "commands": ["workbench.action.showCommands"]
+        },
+        {
+            "before": ["<leader>", "r"],
+            "commands": [
+                "editor.action.rename"
+            ]
+        },
+        {
+            "before": ["g", "r", "d"],
+            "commands": [
+                "editor.action.revealDefinition",
+            ],
+            "silent": true
+        },
+        {
+            "before": ["g", "r", "r"],
+            "commands": [
+                "editor.action.goToReferences",
+            ],
+            "silent": true
+        },
+        {
+            "before": ["g", "r", "a"],
+            "commands": [
+                "editor.action.codeAction",
+            ],
+            "silent": true
+        },
+        {
+            "before": ["<leader>", "f", "m"],
+            "commands": [
+                "editor.action.formatDocument"
+            ],
+            "silent": true
+        },
+        {
+            "before": ["<leader>", "x", "c"],
+            "commands": [
+                "workbench.action.closeActiveEditor"
+            ],
+            "silent": true
+        },
+        {
+            "before": ["<leader>", "x", "-"],
+            "commands": [
+                "workbench.action.closeEditorsInGroup"
+            ],
+            "silent": true
+        },
+        {
+            "before": ["<leader>", "<leader>"],
+            "commands": [
+                "workbench.action.showAllEditors"  // Search in buffers
+            ],
+            "silent": true
+        },
+        {
+            "before": ["<leader>", "s", "f"],
+            "commands": ["workbench.action.quickOpen"],
+            "silent": true
+        },
+        {
+            "before": ["<leader>", "s", "g"],
+            "commands": [
+                "workbench.action.findInFiles"  // Search grep
+            ],
+            "silent": true
+        },
+        {
+            "before": ["<leader>", "s", "s"],
+            "commands": [
+                "workbench.action.gotoSymbol"  // Search symbols in file 
+            ],
+            "silent": true
+        },
+        {
+            "before": ["<leader>", "t", "o"],
+            "commands": [
+                "terminal.focus" // Open terminal
+            ],
+            "silent": true
+        }
+    ],
+    "vim.visualModeKeyBindings": [
+        {
+            "before": ["J"],
+            "commands": [
+                "editor.action.moveLinesDownAction"
+            ],
+            "silent": true
+        },
+        {
+            "before": ["K"],
+            "commands": [
+                "editor.action.moveLinesUpAction"
+            ],
+            "silent": true
+        }
+    ]
+}
